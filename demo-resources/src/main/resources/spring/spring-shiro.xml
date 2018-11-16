@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.3.xsd"
+       default-lazy-init="true">
+
+
+    <!-- Shiro过滤器配置 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!--登录地址: 用于未登录访问被拒后跳转-->
+        <property name="loginUrl" value="/login"/>
+        <!--登录成功后跳转地址-->
+        <!--<property name="successUrl" value="/index/view"/>-->
+        <!--没有足够权限访问资源被拘时跳转地址-->
+        <property name="unauthorizedUrl" value="/message/noPermission"/>
+        <!--过滤链配置-->
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="authc"/>
+                <entry key="channel" value-ref="channel"/>
+                <entry key="permission" value-ref="permission"/>
+            </util:map>
+        </property>
+        <!-- Shiro过滤链定义 -->
+        <!-- value值的第一个'/'代表的路径是相对于HttpServletRequest.getContextPath()的值来的 -->
+        <!--/sku/**=authc,perms[sa:sku],roles[sa]-->
+        <property name="filterChainDefinitions">
+            <value>
+                /channel/**=authc
+                /index/**=authc,channel
+                /message/**=anon
+                /login=anon
+                /logout=anon
+                /resources/**=anon
+                /authc/**=authc,channel
+                /**=authc,channel,permission
+            </value>
+        </property>
+    </bean>
+
+    <!--重写登录认证过滤器-->
+    <bean id="authc" class="com.demo.web.shiro.filter.DemoFormAuthenticationFilter"/>
+    <!--登录后Channel选择过滤器-->
+    <bean id="channel" class="com.demo.web.shiro.filter.ChannelCheckFilter">
+        <property name="redirectUrl" value="/channel/list"/>
+    </bean>
+    <!--重写权限认证顾虑器-->
+    <bean id="permission" class="com.demo.web.shiro.filter.PermissionCheckFilter"/>
+
+    <!--SecurityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="demoRealm"/>
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!-- 自定义Realm -->
+    <bean id="demoRealm" class="com.demo.web.shiro.DemoRealm"/>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- SessionManager -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="1800000"></property>
+        <property name="deleteInvalidSessions" value="true"></property>
+        <property name="sessionDAO" ref="sessionDAO"></property>
+        <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+        <property name="sessionIdCookie" ref="sharesession"/>
+    </bean>
+
+    <!--Redis SessionDao实现-->
+    <bean id="sessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+
+    <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+    <bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- cookie的name,对应的默认是 JSESSIONID -->
+        <constructor-arg name="name" value="SHAREJSESSIONID"/>
+        <!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
+        <property name="path" value="/"/>
+        <property name="httpOnly" value="true"/>
+    </bean>
+
+    <!-- CacheManager -->
+    <bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+
+    <bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+        <property name="jedisPoolConfig" ref="poolConfig"/>
+    </bean>
+
+
+</beans>

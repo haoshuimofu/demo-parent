@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ResourceDao">
+  <resultMap id="BaseResultMap" type="com.demo.domain.model.Resource">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="res_name" jdbcType="VARCHAR" property="resName" />
+    <result column="res_desc" jdbcType="VARCHAR" property="resDesc" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="is_parent" jdbcType="INTEGER" property="isParent" />
+    <result column="res_path" jdbcType="VARCHAR" property="resPath" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="modified_by" jdbcType="INTEGER" property="modifiedBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    id, res_name, res_desc, type, parent_id, is_parent, res_path, created, created_by, 
+    modified, modified_by
+  </sql>
+  <insert id="insert" parameterType="com.demo.domain.model.Resource">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    INSERT INTO t_resource (
+      res_name, res_desc, type, parent_id, is_parent, res_path, created, created_by, 
+    modified, modified_by
+    VALUES (#{resName,jdbcType=VARCHAR}, #{resDesc,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=INTEGER}, #{isParent,jdbcType=INTEGER}, #{resPath,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, 
+      #{modifiedBy,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertList" parameterType="java.util.List">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    INSERT INTO t_resource (
+      res_name, res_desc, type, parent_id, is_parent, res_path, created, created_by, 
+    modified, modified_by
+    ) VALUES 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+      #{item.res_name,jdbcType=VARCHAR}, #{item.res_desc,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER}, 
+      #{item.parent_id,jdbcType=INTEGER}, #{item.is_parent,jdbcType=INTEGER}, #{item.res_path,jdbcType=VARCHAR}, 
+      #{item.created,jdbcType=TIMESTAMP}, #{item.created_by,jdbcType=INTEGER}, #{item.modified,jdbcType=TIMESTAMP}, 
+      #{item.modified_by,jdbcType=INTEGER}
+    </foreach>
+  </insert>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_resource WHERE id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectOne" parameterType="com.demo.domain.model.Resource" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_resource
+    <where>
+      <if test="resName != null">
+        AND res_name = #{resName,jdbcType=VARCHAR}
+      </if>
+      <if test="resDesc != null">
+        AND res_desc = #{resDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="parentId != null">
+        AND parent_id = #{parentId,jdbcType=INTEGER}
+      </if>
+      <if test="isParent != null">
+        AND is_parent = #{isParent,jdbcType=INTEGER}
+      </if>
+      <if test="resPath != null">
+        AND res_path = #{resPath,jdbcType=VARCHAR}
+      </if>
+      <if test="created != null">
+        AND created = #{created,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createdBy != null">
+        AND created_by = #{createdBy,jdbcType=INTEGER}
+      </if>
+      <if test="modified != null">
+        AND modified = #{modified,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modifiedBy != null">
+        AND modified_by = #{modifiedBy,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectList" parameterType="com.demo.domain.model.Resource" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_resource
+    <where>
+      <if test="resName != null">
+        AND res_name = #{resName,jdbcType=VARCHAR}
+      </if>
+      <if test="resDesc != null">
+        AND res_desc = #{resDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="parentId != null">
+        AND parent_id = #{parentId,jdbcType=INTEGER}
+      </if>
+      <if test="isParent != null">
+        AND is_parent = #{isParent,jdbcType=INTEGER}
+      </if>
+      <if test="resPath != null">
+        AND res_path = #{resPath,jdbcType=VARCHAR}
+      </if>
+      <if test="created != null">
+        AND created = #{created,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createdBy != null">
+        AND created_by = #{createdBy,jdbcType=INTEGER}
+      </if>
+      <if test="modified != null">
+        AND modified = #{modified,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modifiedBy != null">
+        AND modified_by = #{modifiedBy,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_resource
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    DELETE FROM t_resource WHERE id = #{id,jdbcType=INTEGER}
+  </delete>
+  <update id="update" parameterType="com.demo.domain.model.Resource">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    UPDATE t_resource
+    <set>
+      <if test="resName != null">
+        res_name = #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="resDesc != null">
+        res_desc = #{resDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="isParent != null">
+        is_parent = #{isParent,jdbcType=INTEGER},
+      </if>
+      <if test="resPath != null">
+        res_path = #{resPath,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        modified_by = #{modifiedBy,jdbcType=INTEGER},
+      </if>
+    </set>
+     WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

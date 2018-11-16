@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.UserRoleDao">
+  <resultMap id="BaseResultMap" type="com.demo.domain.model.UserRole">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    user_id, role_id
+  </sql>
+  <insert id="insert" parameterType="com.demo.domain.model.UserRole">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    INSERT INTO t_user_role (
+      user_id, role_id
+    VALUES (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertList" parameterType="java.util.List">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    INSERT INTO t_user_role (
+      user_id, role_id
+    ) VALUES 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+      #{item.user_id,jdbcType=INTEGER}, #{item.role_id,jdbcType=INTEGER}
+    </foreach>
+  </insert>
+  <select id="selectOne" parameterType="com.demo.domain.model.UserRole" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_user_role
+    <where>
+      <if test="userId != null">
+        AND user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="roleId != null">
+        AND role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectList" parameterType="com.demo.domain.model.UserRole" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_user_role
+    <where>
+      <if test="userId != null">
+        AND user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="roleId != null">
+        AND role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    SELECT <include refid="Base_Column_List" /> FROM t_user_role
+  </select>
+  <delete id="deleteById" parameterType="com.demo.domain.model.UserRoleKey">
+    <!--@mbg.generated 2018-17-46 05:46:56-->
+    DELETE FROM t_user_role WHERE user_id = #{userId,jdbcType=INTEGER} AND role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   	http://www.springframework.org/schema/beans/spring-beans.xsd
+	   	http://www.springframework.org/schema/util
+	   	http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id="p_dataSource" location="classpath*:dataSource.properties"/>
+
+    <!-- parentSource -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" abstract="false">
+        <property name="driverClass" value="#{p_dataSource['dataSource.driverClass']}"></property>
+        <property name="jdbcUrl" value="#{p_dataSource['dataSource.jdbcUrl']}"/>
+        <property name="user" value="#{p_dataSource['dataSource.user']}"/>
+        <property name="password" value="#{p_dataSource['dataSource.password']}"/>
+        <property name="minPoolSize" value="#{p_dataSource['dataSource.minPoolSize']}"/>
+
+        <property name="maxPoolSize" value="#{p_dataSource['dataSource.maxPoolSize']}"/>
+        <property name="maxIdleTime" value="#{p_dataSource['dataSource.maxIdleTime']}"/>
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="#{p_dataSource['dataSource.acquireIncrement']}"/>
+        <property name="maxStatements" value="#{p_dataSource['dataSource.maxStatements']}"/>
+
+        <property name="initialPoolSize" value="#{p_dataSource['dataSource.initialPoolSize']}"/>
+        <property name="idleConnectionTestPeriod" value="#{p_dataSource['dataSource.idleConnectionTestPeriod']}"/>
+        <property name="acquireRetryAttempts" value="#{p_dataSource['dataSource.acquireRetryAttempts']}"/>
+        <property name="breakAfterAcquireFailure" value="#{p_dataSource['dataSource.breakAfterAcquireFailure']}"/>
+        <property name="testConnectionOnCheckout" value="#{p_dataSource['dataSource.testConnectionOnCheckout']}"/>
+    </bean>
+
+
+    <!-- 配置sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    <!-- mybatis mapper接口扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.demo.dao"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+</beans>

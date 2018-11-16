@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.nav li{
+	list-style-type:none;
+	padding:5px;
+}
+.form-label{
+	width:100px;
+	text-align: right;
+}
+.required{
+	color:red;
+}

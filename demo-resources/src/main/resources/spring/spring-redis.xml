@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   	http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+
+
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id="redisConfig" location="classpath*:redis.properties"/>
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--<property name="maxTotal" value="200"/>-->
+        <!--<property name="maxIdle" value="1000"/>-->
+        <!--<property name="minIdle" value="500"/>-->
+        <!--<property name="maxWaitMillis" value="#{redisConfig['redis.maxWait']}"/>-->
+        <!--<property name="testOnBorrow" value="#{redisConfig['redis.testOnBorrow']}"/>-->
+    </bean>
+
+</beans>
