@@ -2,12 +2,7 @@ package threadPool;
 
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * sdf
@@ -26,12 +21,12 @@ public class ThreadPoolTest {
                 .daemon(false) // true就是守护线程了, 此处应该是用户线程
                 .build();
 
-        ExecutorService executorService = new ThreadPoolExecutor(5,5, 0,
+        ExecutorService executorService = new ThreadPoolExecutor(5, 10, 0,
                 TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), threadFactory);
 
 
         PoolThread pt = new PoolThread();
-        int size = 100;
+        int size = 10000;
         for (int i = 0; i < size; i++) {
 //            int finalI = i;
 //            executorService.execute(()->{
@@ -42,6 +37,11 @@ public class ThreadPoolTest {
             executorService.execute(new Thread(pt));
         }
         executorService.shutdown();
+        try {
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -51,8 +51,15 @@ public class ThreadPoolTest {
         @Override
         public void run() {
 
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println(Thread.currentThread().getName());
 
         }
     }
+
+
 }
