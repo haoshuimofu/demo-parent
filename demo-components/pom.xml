@@ -14,6 +14,7 @@
 
     <modules>
         <module>demo-components-solr</module>
+        <module>demo-components-redis</module>
     </modules>
 
 </project>
