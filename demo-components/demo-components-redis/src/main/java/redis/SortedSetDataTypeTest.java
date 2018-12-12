@@ -2,6 +2,8 @@ package redis;
 
 import redis.clients.jedis.Jedis;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,12 +18,12 @@ public class SortedSetDataTypeTest {
     public static void main(String[] args) {
         Jedis jedis = JedisPoolUtil.getJedisResource();
 
-//        Map<String, Double> valueScoreMap = new HashMap<>();
-//        valueScoreMap.put("a", 1D);
-//        valueScoreMap.put("b", 2D);
-//        valueScoreMap.put("c", 3D);
-//        Long zaddResult = jedis.zadd("scores", valueScoreMap);
-//        System.out.println("add Result=" + zaddResult); // 返回的SortedSets的长度
+        Map<String, Double> valueScoreMap = new HashMap<>();
+        valueScoreMap.put("a", 3D);
+        valueScoreMap.put("b", 2D);
+        valueScoreMap.put("c", 1D);
+        Long zaddResult = jedis.zadd("scores", valueScoreMap);
+        System.out.println("add Result=" + zaddResult); // 返回的SortedSets的长度
 
         Set<String> sets = jedis.zrange("scores", 0, 1);
         sets.forEach(System.out::println);
