@@ -66,9 +66,9 @@
 
     <!-- SessionManager -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-        <property name="globalSessionTimeout" value="1800000"></property>
-        <property name="deleteInvalidSessions" value="true"></property>
-        <property name="sessionDAO" ref="sessionDAO"></property>
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionDAO" ref="sessionDAO"/>
         <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
         <property name="sessionIdCookie" ref="sharesession"/>
     </bean>

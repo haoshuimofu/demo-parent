@@ -9,7 +9,6 @@
     <artifactId>demo-web</artifactId>
     <packaging>war</packaging>
     <name>demo-web</name>
-    <url>http://maven.apache.org</url>
     <dependencies>
 
         <dependency>
@@ -99,10 +98,13 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
+
 
         <!--jstl-->
         <dependency>
@@ -193,6 +195,11 @@
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
         </dependency>
     </dependencies>
     <build>

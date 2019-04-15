@@ -28,10 +28,4 @@
 
     <util:properties id="envConfig" location="classpath*:env.properties"/>
 
-
-    <!-- 缓存 -->
-    <!--<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
-    <!--<property name="configLocation" value="classpath:${ehcache.file}"></property>-->
-    <!--</bean>-->
-
 </beans>
