@@ -18,7 +18,7 @@ public class ClassLoaderTest {
         }
 
         private byte[] loadByte(String name) throws Exception {
-            name = name.replaceAll("\\.", "/");
+//            name = name.replaceAll("\\.", "/");
             FileInputStream fis = new FileInputStream(classPath + "/" + name
                     + ".class");
             int len = fis.available();
@@ -29,6 +29,7 @@ public class ClassLoaderTest {
 
         }
 
+        @Override
         protected Class<?> findClass(String name) throws ClassNotFoundException {
             try {
                 byte[] data = loadByte(name);
