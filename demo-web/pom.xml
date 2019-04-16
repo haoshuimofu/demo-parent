@@ -98,14 +98,6 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-
         <!--jstl-->
         <dependency>
             <groupId>jstl</groupId>
@@ -177,10 +169,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.demo</groupId>
             <artifactId>demo-domain</artifactId>
@@ -199,7 +188,8 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>

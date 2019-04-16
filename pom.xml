@@ -17,7 +17,7 @@
     <name>demo-parent</name>
 
     <properties>
-        <version.spring>5.1.6.RELEASE</version.spring>
+        <version.spring>4.3.23.RELEASE</version.spring>
         <version.mybatis>3.5.1</version.mybatis>
         <version.mybatis-spring>2.0.1</version.mybatis-spring>
         <version.c3p0>0.9.5.4</version.c3p0>
@@ -260,11 +260,14 @@
                 <artifactId>jstl</artifactId>
                 <version>1.2</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
             <dependency>
                 <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>3.0.1</version>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
             </dependency>
+
 
             <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
             <dependency>
