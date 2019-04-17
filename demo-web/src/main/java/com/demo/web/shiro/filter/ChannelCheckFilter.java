@@ -20,7 +20,7 @@ import javax.servlet.ServletResponse;
  */
 public class ChannelCheckFilter extends AccessControlFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoFormAuthenticationFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(ChannelCheckFilter.class);
 
     /**
      * 重定向URL,如果channel check不通过时跳转的URL
