@@ -2,7 +2,8 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
 	<display-name>demo-web</display-name>
 
-	<!-- 日志配置 -->
+	<!--4.x 到 5.x升级需要注释log4j-->
+	<!-- 日志配置
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>/WEB-INF/log4j.properties</param-value>
@@ -11,10 +12,10 @@
 		<param-name>log4jRefreshInterval</param-name>
 		<param-value>600000</param-value>
 	</context-param>
-	<!-- 定义LOG4J监听器 必须放在ContextLoaderListner前面，因为ContextLoaderListner会加载log4j.properties文件 -->
+	&lt;!&ndash; 定义LOG4J监听器 必须放在ContextLoaderListner前面，因为ContextLoaderListner会加载log4j.properties文件 &ndash;&gt;
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
+	</listener>-->
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
