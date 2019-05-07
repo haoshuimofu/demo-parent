@@ -38,7 +38,6 @@ public class ChannelCheckFilter extends AccessControlFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
-        logger.info("");
         Session session = this.getSubject(servletRequest, servletResponse).getSession();
         SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConstants.SESSION_USER_ATTR_KEY);
         return sessionUser != null && sessionUser.getChannel() != null;
