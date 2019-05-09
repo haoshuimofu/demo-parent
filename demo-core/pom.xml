@@ -39,6 +39,26 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
+        <!-- mybatis-codegen -->
+        <dependency>
+            <groupId>com.demo.components</groupId>
+            <artifactId>mybatis-codegen</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <!--排除codegen-->
+                    <exclude>codegen/*.*</exclude>
+                </excludes>
+            </resource>
+
+        </resources>
+    </build>
 
 </project>

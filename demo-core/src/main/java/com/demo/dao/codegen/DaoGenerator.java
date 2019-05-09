@@ -1,3 +1,5 @@
+package com.demo.dao.codegen;
+
 import com.demo.components.mybatis.codegen.DemoMybatisGenerator;
 
 /**
