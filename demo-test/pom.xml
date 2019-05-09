@@ -28,5 +28,9 @@
 
     </dependencies>
 
+    <build>
+        <finalName>demo-test</finalName>
+    </build>
+
 
 </project>

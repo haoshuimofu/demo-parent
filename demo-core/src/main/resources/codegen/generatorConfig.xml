@@ -67,6 +67,10 @@
         </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
-        <table tableName="t_users" domainObjectName="User"/>
+        <table tableName="t_user" domainObjectName="User"/>
+        <table tableName="t_role" domainObjectName="Role"/>
+        <table tableName="t_user_role" domainObjectName="UserRole"/>
+        <table tableName="t_resource" domainObjectName="Resource"/>
+        <table tableName="t_role_resource" domainObjectName="RoleResource"/>
     </context>
 </generatorConfiguration>

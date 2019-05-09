@@ -14,14 +14,24 @@ public class User {
      * 
      * @mbg.generated 2019-05-09 11:50:21
       */
-    private Long id;
+    private Integer id;
 
     /**
      * name
      * 
      * @mbg.generated 2019-05-09 11:50:21
       */
-    private String name;
+    private String username;
+
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * register_time
@@ -86,20 +96,20 @@ public class User {
       */
     private String description;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getRegisterTime() {

@@ -70,4 +70,7 @@
 
     </dependencies>
 
+    <build>
+        <finalName>demo-service</finalName>
+    </build>
 </project>
