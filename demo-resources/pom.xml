@@ -114,6 +114,12 @@
             <artifactId>shiro-redis</artifactId>
         </dependency>
 
+        <!-- mybatis-codegen -->
+        <dependency>
+            <groupId>com.demo.components</groupId>
+            <artifactId>mybatis-codegen</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 
@@ -153,6 +159,9 @@
                     <exclude>config/dev/*</exclude>
                     <exclude>config/test/*</exclude>
                     <exclude>config/prod/*</exclude>
+
+                    <!--排除codegen-->
+                    <exclude>codegen/*.*</exclude>
                 </excludes>
             </resource>
             <resource>
