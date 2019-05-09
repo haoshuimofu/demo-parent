@@ -2,31 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.dao.UserRoleDao">
   <resultMap id="BaseResultMap" type="com.demo.domain.model.UserRole">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <id column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     user_id, role_id
   </sql>
   <insert id="insert" parameterType="com.demo.domain.model.UserRole">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     INSERT INTO t_user_role (
       user_id, role_id
-    VALUES (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
+    ) VALUES (  
+      #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertList" parameterType="java.util.List">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     INSERT INTO t_user_role (
       user_id, role_id
     ) VALUES 
-    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
-      #{item.user_id,jdbcType=INTEGER}, #{item.role_id,jdbcType=INTEGER}
+    <foreach collection="list" index="index" item="item" separator=",">
+      (
+        #{item.userId,jdbcType=INTEGER}, #{item.roleId,jdbcType=INTEGER}
+      )
     </foreach>
   </insert>
+  <select id="selectById" parameterType="com.demo.domain.model.UserRoleKey" resultMap="BaseResultMap">
+    <!--@mbg.generated 2019-05-09 14:45:18-->
+    SELECT <include refid="Base_Column_List" /> FROM t_user_role WHERE user_id = #{userId,jdbcType=INTEGER}
+     AND role_id = #{roleId,jdbcType=INTEGER}
+  </select>
   <select id="selectOne" parameterType="com.demo.domain.model.UserRole" resultMap="BaseResultMap">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     SELECT <include refid="Base_Column_List" /> FROM t_user_role
     <where>
       <if test="userId != null">
@@ -35,10 +44,11 @@
       <if test="roleId != null">
         AND role_id = #{roleId,jdbcType=INTEGER}
       </if>
+      LIMIT 1
     </where>
   </select>
   <select id="selectList" parameterType="com.demo.domain.model.UserRole" resultMap="BaseResultMap">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     SELECT <include refid="Base_Column_List" /> FROM t_user_role
     <where>
       <if test="userId != null">
@@ -50,11 +60,31 @@
     </where>
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
+    <!--@mbg.generated 2019-05-09 14:45:18-->
     SELECT <include refid="Base_Column_List" /> FROM t_user_role
   </select>
+  <select id="count" parameterType="com.demo.domain.model.UserRole" resultType="java.lang.Long">
+    <!--@mbg.generated 2019-05-09 14:45:18-->
+    SELECT count(1) FROM t_user_role
+    <where>
+      <if test="userId != null">
+        AND user_id=#{userId,jdbcType=INTEGER}
+      </if>
+      <if test="roleId != null">
+        AND role_id=#{roleId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
   <delete id="deleteById" parameterType="com.demo.domain.model.UserRoleKey">
-    <!--@mbg.generated 2018-17-46 05:46:56-->
-    DELETE FROM t_user_role WHERE user_id = #{userId,jdbcType=INTEGER} AND role_id = #{roleId,jdbcType=INTEGER}
+    <!--@mbg.generated 2019-05-09 14:45:18-->
+    DELETE FROM t_user_role WHERE user_id = #{userId,jdbcType=INTEGER}, 
+       AND role_id = #{roleId,jdbcType=INTEGER}
   </delete>
+  <update id="update" parameterType="com.demo.domain.model.UserRole">
+    <!--@mbg.generated 2019-05-09 14:45:18-->
+    UPDATE t_user_role
+    <set />
+    WHERE user_id = #{userId,jdbcType=INTEGER}, 
+       AND role_id = #{roleId,jdbcType=INTEGER}
+  </update>
 </mapper>

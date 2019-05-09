@@ -1,6 +1,6 @@
 package com.demo.dao;
 
-import com.demo.dao.base.BaseDao;
+import com.demo.compents.base.clazz.BaseDao;
 import com.demo.domain.model.Role;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
