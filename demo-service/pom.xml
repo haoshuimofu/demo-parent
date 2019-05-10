@@ -68,11 +68,11 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.demo.components</groupId>
-            <artifactId>spring-data-redis-cluster-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.demo.components</groupId>-->
+        <!--<artifactId>spring-data-redis-cluster-starter</artifactId>-->
+        <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
