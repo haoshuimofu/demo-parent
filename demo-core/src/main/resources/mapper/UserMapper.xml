@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.dao.UserDao">
   <resultMap id="BaseResultMap" type="com.demo.domain.model.User">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -13,12 +13,21 @@
     <result column="modified" jdbcType="TIMESTAMP" property="modified" />
     <result column="modified_by" jdbcType="INTEGER" property="modifiedBy" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.demo.domain.model.User">
+    <!--@mbg.generated 2019-05-14 14:38:31-->
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     id, username, password, cellphone, email, created, created_by, modified, modified_by
   </sql>
+  <sql id="Column_List_With_BLOBs">
+    <!--@mbg.generated 2019-05-14 14:38:31-->
+    id, username, password, cellphone, email, created, created_by, modified, modified_by, 
+    description
+  </sql>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.demo.domain.model.User" useGeneratedKeys="true">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     INSERT INTO t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       username,
@@ -37,6 +46,7 @@
       <if test="modifiedBy != null">
         modified_by,
       </if>
+      description,
     </trim>
     VALUES
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -56,27 +66,29 @@
       <if test="modifiedBy != null">
         #{modifiedBy,jdbcType=INTEGER},
       </if>
+      #{description,jdbcType=LONGVARCHAR},
     </trim>
   </insert>
   <insert id="insertList" parameterType="java.util.List">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     INSERT INTO t_user (
-      username, password, cellphone, email, created, created_by, modified, modified_by
+      username, password, cellphone, email, created, created_by, modified, modified_by, 
+      description
     ) VALUES 
     <foreach collection="list" index="index" item="item" separator=",">
       (
         #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, 
         #{item.email,jdbcType=VARCHAR}, #{item.created,jdbcType=TIMESTAMP}, #{item.createdBy,jdbcType=INTEGER}, 
-        #{item.modified,jdbcType=TIMESTAMP}, #{item.modifiedBy,jdbcType=INTEGER}
+        #{item.modified,jdbcType=TIMESTAMP}, #{item.modifiedBy,jdbcType=INTEGER}, #{item.description,jdbcType=LONGVARCHAR}
       )
     </foreach>
   </insert>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     SELECT <include refid="Base_Column_List" /> FROM t_user WHERE id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectOne" parameterType="com.demo.domain.model.User" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     SELECT <include refid="Base_Column_List" /> FROM t_user
     <where>
       <if test="username != null">
@@ -102,12 +114,15 @@
       </if>
       <if test="modifiedBy != null">
         AND modified_by = #{modifiedBy,jdbcType=INTEGER}
+      </if>
+      <if test="description != null">
+        AND description = #{description,jdbcType=LONGVARCHAR}
       </if>
       LIMIT 1
     </where>
   </select>
   <select id="selectList" parameterType="com.demo.domain.model.User" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     SELECT <include refid="Base_Column_List" /> FROM t_user
     <where>
       <if test="username != null">
@@ -134,14 +149,17 @@
       <if test="modifiedBy != null">
         AND modified_by = #{modifiedBy,jdbcType=INTEGER}
       </if>
+      <if test="description != null">
+        AND description = #{description,jdbcType=LONGVARCHAR}
+      </if>
     </where>
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     SELECT <include refid="Base_Column_List" /> FROM t_user
   </select>
   <select id="count" parameterType="com.demo.domain.model.User" resultType="java.lang.Long">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     SELECT count(1) FROM t_user
     <where>
       <if test="id != null">
@@ -171,14 +189,17 @@
       <if test="modifiedBy != null">
         AND modified_by=#{modifiedBy,jdbcType=INTEGER}
       </if>
+      <if test="description != null">
+        AND description=#{description,jdbcType=LONGVARCHAR}
+      </if>
     </where>
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     DELETE FROM t_user WHERE id = #{id,jdbcType=INTEGER}
   </delete>
   <update id="update" parameterType="com.demo.domain.model.User">
-    <!--@mbg.generated 2019-05-09 14:45:18-->
+    <!--@mbg.generated 2019-05-14 14:38:31-->
     UPDATE t_user
     <set>
       <if test="username != null">
@@ -204,6 +225,9 @@
       </if>
       <if test="modifiedBy != null">
         modified_by = #{modifiedBy,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
       </if>
     </set>
     WHERE id = #{id,jdbcType=INTEGER}
