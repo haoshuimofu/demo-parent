@@ -13,7 +13,7 @@
     <context id="context" targetRuntime="com.demo.components.mybatis.codegen.DemoIntrospectedTableMyBatis3Impl">
 
         <property name="javaFileEncoding" value="UTF-8"/>
-        <!--<property name="isSimple" value="true"/>-->
+        <property name="isSimple" value="false"/>
 
         <plugin type="com.demo.components.mybatis.codegen.plugins.DemoJavaClientWrapperPlugin">
             <property name="javaClientTargetPackage" value="${mapper.package}"/>
