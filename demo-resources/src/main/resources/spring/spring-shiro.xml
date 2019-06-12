@@ -39,6 +39,7 @@
                 /logout=anon
                 /resources/**=anon
                 /authc/**=authc,channel
+                /user/**=anon
                 /**=authc,channel,permission
             </value>
         </property>
