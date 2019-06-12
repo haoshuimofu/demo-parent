@@ -1,6 +1,6 @@
 package com.demo.dao;
 
-import com.demo.compents.base.clazz.BaseDao;
+import com.demo.components.base.dao.BaseDao;
 import com.demo.domain.model.UserRole;
 import com.demo.domain.model.UserRoleKey;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package com.demo.dao;
 
-import com.demo.compents.base.clazz.BaseDao;
+import com.demo.components.base.dao.BaseDao;
 import com.demo.domain.model.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
