@@ -1,6 +1,6 @@
 package com.demo.dao.codegen;
 
-import com.demo.components.mybatis.codegen.DemoMybatisGenerator;
+import com.demo.components.mybatis.codegen.MybatisGenerator;
 
 /**
  * @Author ddmc
@@ -11,7 +11,7 @@ public class DaoGenerator {
 
     public static void main(String[] args) {
         try {
-            DemoMybatisGenerator.runFromClassPath(KANBAN);
+            MybatisGenerator.runFromClassPath(KANBAN);
         } catch (Exception e) {
             e.printStackTrace();
         }

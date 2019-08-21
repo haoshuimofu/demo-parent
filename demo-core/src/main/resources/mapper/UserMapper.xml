@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.dao.UserDao">
   <resultMap id="BaseResultMap" type="com.demo.domain.model.User">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
     <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
@@ -15,16 +16,17 @@
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
-    id, username, password, cellphone, email, created, created_by, modified, modified_by, 
-    description
+    <!--@mbg.generated 2019-08-20 13:54:39-->
+    id, username, password, gender, cellphone, email, created, created_by, modified, 
+    modified_by, description
   </sql>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.demo.domain.model.User" useGeneratedKeys="true">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     INSERT INTO t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       username,
       password,
+      gender,
       cellphone,
       email,
       <if test="created != null">
@@ -45,6 +47,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       #{username,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR},
+      #{gender,jdbcType=TINYINT},
       #{cellphone,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR},
       <if test="created != null">
@@ -63,25 +66,26 @@
     </trim>
   </insert>
   <insert id="insertList" parameterType="java.util.List">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     INSERT INTO t_user (
-      username, password, cellphone, email, created, created_by, modified, modified_by, 
+      username, password, gender, cellphone, email, created, created_by, modified, modified_by, 
       description
     ) VALUES 
     <foreach collection="list" index="index" item="item" separator=",">
       (
-        #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, 
-        #{item.email,jdbcType=VARCHAR}, #{item.created,jdbcType=TIMESTAMP}, #{item.createdBy,jdbcType=INTEGER}, 
-        #{item.modified,jdbcType=TIMESTAMP}, #{item.modifiedBy,jdbcType=INTEGER}, #{item.description,jdbcType=LONGVARCHAR}
+        #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.gender,jdbcType=TINYINT}, 
+        #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.created,jdbcType=TIMESTAMP}, 
+        #{item.createdBy,jdbcType=INTEGER}, #{item.modified,jdbcType=TIMESTAMP}, #{item.modifiedBy,jdbcType=INTEGER}, 
+        #{item.description,jdbcType=LONGVARCHAR}
       )
     </foreach>
   </insert>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     SELECT <include refid="Base_Column_List" /> FROM t_user WHERE id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectOne" parameterType="com.demo.domain.model.User" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     SELECT <include refid="Base_Column_List" /> FROM t_user
     <where>
       <if test="username != null">
@@ -89,6 +93,9 @@
       </if>
       <if test="password != null">
         AND password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="gender != null">
+        AND gender = #{gender,jdbcType=TINYINT}
       </if>
       <if test="cellphone != null">
         AND cellphone = #{cellphone,jdbcType=VARCHAR}
@@ -115,7 +122,7 @@
     </where>
   </select>
   <select id="selectList" parameterType="com.demo.domain.model.User" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     SELECT <include refid="Base_Column_List" /> FROM t_user
     <where>
       <if test="username != null">
@@ -123,6 +130,9 @@
       </if>
       <if test="password != null">
         AND password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="gender != null">
+        AND gender = #{gender,jdbcType=TINYINT}
       </if>
       <if test="cellphone != null">
         AND cellphone = #{cellphone,jdbcType=VARCHAR}
@@ -148,11 +158,11 @@
     </where>
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     SELECT <include refid="Base_Column_List" /> FROM t_user
   </select>
   <select id="count" parameterType="com.demo.domain.model.User" resultType="java.lang.Long">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     SELECT count(1) FROM t_user
     <where>
       <if test="id != null">
@@ -163,6 +173,9 @@
       </if>
       <if test="password != null">
         AND password=#{password,jdbcType=VARCHAR}
+      </if>
+      <if test="gender != null">
+        AND gender=#{gender,jdbcType=TINYINT}
       </if>
       <if test="cellphone != null">
         AND cellphone=#{cellphone,jdbcType=VARCHAR}
@@ -188,11 +201,11 @@
     </where>
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     DELETE FROM t_user WHERE id = #{id,jdbcType=INTEGER}
   </delete>
   <update id="update" parameterType="com.demo.domain.model.User">
-    <!--@mbg.generated 2019-06-12 13:36:10-->
+    <!--@mbg.generated 2019-08-20 13:54:39-->
     UPDATE t_user
     <set>
       <if test="username != null">
@@ -200,6 +213,9 @@
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
       </if>
       <if test="cellphone != null">
         cellphone = #{cellphone,jdbcType=VARCHAR},

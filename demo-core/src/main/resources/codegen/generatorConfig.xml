@@ -10,12 +10,12 @@
     <classPathEntry location="${driver.class.path}"/>
 
     <!--<context id="context" targetRuntime="MyBatis3Simple">-->
-    <context id="context" targetRuntime="com.demo.components.mybatis.codegen.DemoIntrospectedTableMyBatis3Impl">
+    <context id="context" targetRuntime="com.demo.components.mybatis.codegen.CustomIntrospectedTableMyBatis3Impl">
 
         <property name="javaFileEncoding" value="UTF-8"/>
         <property name="isSimple" value="true"/>
 
-        <plugin type="com.demo.components.mybatis.codegen.plugins.DemoJavaClientWrapperPlugin">
+        <plugin type="com.demo.components.mybatis.codegen.plugins.JavaClientWrapperPlugin">
             <property name="javaClientTargetPackage" value="${mapper.package}"/>
             <property name="javaClientTargetProject" value="${mapper.project}"/>
 
@@ -24,7 +24,7 @@
         </plugin>
 
         <!--为每个Dao生成一个扩展的sqlMap文件, 如UserMapperExt.xml-->
-        <plugin type="com.demo.components.mybatis.codegen.plugins.DemoMapperExtGeneratorPlugin"/>
+        <plugin type="com.demo.components.mybatis.codegen.plugins.MapperExtXmlGeneratorPlugin"/>
 
 
         <!--默认注释生成器，后两项属性从1.3.2版本才有-->
@@ -36,7 +36,7 @@
         <!--</commentGenerator>-->
 
         <!--自定义注释生成器-->
-        <commentGenerator type="com.demo.components.mybatis.codegen.generator.DemoCommentGenerator">
+        <commentGenerator type="com.demo.components.mybatis.codegen.generator.CustomCommentGenerator">
             <property name="suppressAllComments" value="false"/>
         </commentGenerator>
 
@@ -46,7 +46,7 @@
                         connectionURL="${jdbc.url}"
                         userId="${jdbc.username}" password="${jdbc.password}"/>
 
-        <javaTypeResolver>
+        <javaTypeResolver type="com.demo.components.mybatis.codegen.resolver.CustomJavaTypeResolverImpl">
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
@@ -69,9 +69,9 @@
 
         <!-- !!!! Table Configurations !!!! -->
         <table tableName="t_user" domainObjectName="User"/>
-        <table tableName="t_role" domainObjectName="Role"/>
-        <table tableName="t_user_role" domainObjectName="UserRole"/>
-        <table tableName="t_resource" domainObjectName="Resource"/>
-        <table tableName="t_role_resource" domainObjectName="RoleResource"/>
+        <!--<table tableName="t_role" domainObjectName="Role"/>-->
+        <!--<table tableName="t_user_role" domainObjectName="UserRole"/>-->
+        <!--<table tableName="t_resource" domainObjectName="Resource"/>-->
+        <!--<table tableName="t_role_resource" domainObjectName="RoleResource"/>-->
     </context>
 </generatorConfiguration>
