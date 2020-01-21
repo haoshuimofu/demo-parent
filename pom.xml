@@ -17,7 +17,7 @@
     <name>demo-parent</name>
 
     <properties>
-        <version.spring>5.1.6.RELEASE</version.spring>
+        <version.spring>5.2.3.RELEASE</version.spring>
         <version.mybatis>3.5.1</version.mybatis>
         <version.mybatis-spring>2.0.1</version.mybatis-spring>
         <version.c3p0>0.9.5.4</version.c3p0>
