@@ -24,7 +24,7 @@
         <version.mysql>5.1.42</version.mysql>
         <version.log4j>1.2.17</version.log4j>
         <version.slf4j>1.7.13</version.slf4j>
-        <version.shiro>1.3.2</version.shiro>
+        <version.shiro>1.9.1</version.shiro>
         <version.solrj>4.7.2</version.solrj>
     </properties>
 
